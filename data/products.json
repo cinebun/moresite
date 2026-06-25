@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "Молоко 3,2%",
+    "category": "milk",
+    "price": "89 ₽/л",
+    "image": "images/products/product1.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Сыр Российский",
+    "category": "milk",
+    "price": "450 ₽/кг",
+    "image": "images/products/product2.jpg"
+  }
+]

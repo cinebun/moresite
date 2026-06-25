@@ -1,0 +1,340 @@
+/* ============================================
+   ГЛАВНАЯ СТРАНИЦА
+   ============================================ */
+
+/* ----- КОНТЕЙНЕР ----- */
+.container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+/* ----- ГЕРОЙ-БАННЕР ----- */
+.hero {
+    padding: 100px 0;
+    background: linear-gradient(135deg, var(--color-dark) 0%, #2a2a2a 100%);
+    color: var(--color-white);
+    position: relative;
+    overflow: hidden;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    right: -10%;
+    top: -20%;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201, 169, 110, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    left: -5%;
+    bottom: -30%;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201, 169, 110, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+}
+
+.hero h1 {
+    font-family: var(--font-accent);
+    font-size: 56px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--color-white);
+}
+
+.hero .subtitle {
+    font-size: 22px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 12px;
+}
+
+.hero .description {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 32px;
+    line-height: 1.8;
+}
+
+.hero .description strong {
+    color: var(--color-gold);
+    font-weight: 600;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+/* ----- СЕКЦИЯ КАТАЛОГА ----- */
+.catalog {
+    padding: 60px 0 80px;
+}
+
+.catalog h2 {
+    text-align: center;
+    font-family: var(--font-accent);
+    font-size: 38px;
+    color: var(--color-dark);
+    margin-bottom: 12px;
+}
+
+.catalog .catalog-subtitle {
+    text-align: center;
+    color: var(--color-text-light);
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+/* ----- СЕТКА ТОВАРОВ ----- */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    align-items: stretch;
+}
+
+@media (max-width: 992px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+}
+
+@media (max-width: 576px) {
+    .products-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .catalog h2 {
+        font-size: 28px;
+    }
+}
+
+/* ----- ФИЛЬТРЫ ----- */
+.catalog-filters {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 10px 28px;
+    border-radius: var(--radius-button);
+    background: transparent;
+    font-weight: 600;
+    font-size: 15px;
+    transition: var(--transition-fast);
+    color: var(--color-gold);
+    border: 2px solid var(--color-gold);
+    cursor: pointer;
+}
+
+.filter-btn:hover {
+    background: var(--color-gold);
+    color: var(--color-white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-button);
+}
+
+.filter-btn.active {
+    background: var(--color-gold);
+    color: var(--color-white);
+    border-color: var(--color-gold);
+    box-shadow: var(--shadow-button);
+}
+
+/* Кнопка "Все товары" (ведёт в каталог) */
+.catalog-link {
+    display: inline-block;
+    text-decoration: none;
+    background: transparent;
+    color: var(--color-gold) !important;
+    border: 2px solid var(--color-gold);
+    transition: var(--transition-fast);
+    padding: 10px 28px;
+    border-radius: var(--radius-button);
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.catalog-link:hover {
+    background: var(--color-gold);
+    color: var(--color-white) !important;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-button);
+}
+
+/* ----- ПАРТНЁРЫ ----- */
+.partners {
+    padding: 50px 0;
+    background: var(--color-gray-light);
+}
+
+.partners h2 {
+    text-align: center;
+    font-family: var(--font-accent);
+    font-size: 36px;
+    color: var(--color-dark);
+    margin-bottom: 40px;
+}
+
+.partners-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+.partner-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    background: var(--color-white);
+    padding: 24px 40px;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-smooth);
+    min-width: 160px;
+}
+
+.partner-item:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+}
+
+.partner-icon {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.partner-item span {
+    font-weight: 600;
+    color: var(--color-dark);
+    font-size: 16px;
+}
+
+/* ----- О КОМПАНИИ (КРАТКО) ----- */
+.about-short {
+    padding: 70px 0;
+    background: var(--color-dark);
+    color: var(--color-white);
+}
+
+.about-short-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about-short h2 {
+    font-family: var(--font-accent);
+    font-size: 36px;
+    margin-bottom: 16px;
+    color: var(--color-gold);
+}
+
+.about-short p {
+    font-size: 18px;
+    opacity: 0.9;
+    margin-bottom: 32px;
+    line-height: 1.8;
+}
+
+.about-stats {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.about-stats div {
+    text-align: center;
+    font-size: 16px;
+    opacity: 0.8;
+}
+
+.about-stats span {
+    display: block;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--color-gold);
+    opacity: 1;
+    margin-bottom: 4px;
+}
+
+@media (max-width: 576px) {
+    .about-short h2 {
+        font-size: 28px;
+    }
+    .about-stats {
+        gap: 30px;
+    }
+    .about-stats span {
+        font-size: 32px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 60px 0;
+        min-height: 60vh;
+        text-align: center;
+    }
+    .hero h1 {
+        font-size: 38px;
+    }
+    .hero .subtitle {
+        font-size: 18px;
+    }
+    .hero-content {
+        max-width: 100%;
+    }
+    .hero-buttons {
+        justify-content: center;
+    }
+    .hero::before,
+    .hero::after {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 30px;
+    }
+    .hero .subtitle {
+        font-size: 16px;
+    }
+    .hero .description {
+        font-size: 15px;
+    }
+}
