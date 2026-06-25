@@ -48,8 +48,6 @@
 
                 <!-- ЛЕВАЯ КОЛОНКА: ИНФОРМАЦИЯ -->
                 <div class="contacts-info">
-
-                    <!-- ТЕЛЕФОН -->
                     <div class="contact-item">
                         <div class="contact-icon">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -62,7 +60,6 @@
                         </div>
                     </div>
 
-                    <!-- АДРЕС -->
                     <div class="contact-item">
                         <div class="contact-icon">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -76,7 +73,6 @@
                         </div>
                     </div>
 
-                    <!-- РЕКВИЗИТЫ -->
                     <div class="contacts-rekvizity">
                         <h4>Реквизиты</h4>
                         <p><strong>ООО «МОРЕ»</strong></p>
@@ -85,7 +81,6 @@
                         <p>ОГРН: 1234567890123</p>
                         <p>г. Владимир</p>
                     </div>
-
                 </div>
 
                 <!-- ПРАВАЯ КОЛОНКА: КАРТА -->
@@ -102,23 +97,24 @@
 
             </div>
 
-            <!-- ФОРМА ОБРАТНОЙ СВЯЗИ -->
+            <!-- ФОРМА ОБРАТНОЙ СВЯЗИ (работает через Formspree) -->
             <div class="contacts-form-wrapper">
                 <h2>Написать нам</h2>
-                <form class="contacts-form" id="contactForm">
+                <form class="contacts-form" action="https://formspree.io/f/mgojaqdw" method="POST">
+                    <input type="hidden" name="_next" value="https://cinebun.github.io/moresite/pages/contacts.html?success=true" />
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name">Ваше имя</label>
-                            <input type="text" id="name" placeholder="Иван Иванов" required />
+                            <input type="text" id="name" name="name" placeholder="Иван Иванов" required />
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" placeholder="ivan@example.com" required />
+                            <input type="email" id="email" name="email" placeholder="ivan@example.com" required />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="message">Сообщение</label>
-                        <textarea id="message" rows="4" placeholder="Ваше сообщение..." required></textarea>
+                        <textarea id="message" name="message" rows="4" placeholder="Ваше сообщение..." required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Отправить</button>
                 </form>
