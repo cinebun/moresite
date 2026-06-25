@@ -1,0 +1,130 @@
+/* ============================================
+   СТРАНИЦА КАТАЛОГА
+   ============================================ */
+
+.catalog-header {
+    padding: 60px 0 30px;
+    background: var(--color-gray-light);
+    text-align: center;
+}
+
+.catalog-header h1 {
+    font-family: var(--font-accent);
+    font-size: 42px;
+    color: var(--color-dark);
+    margin-bottom: 8px;
+}
+
+.catalog-header p {
+    font-size: 18px;
+    color: var(--color-text-light);
+}
+
+.catalog-page {
+    padding: 40px 0 80px;
+}
+
+/* ============================================
+   КНОПКИ-ФИЛЬТРЫ СВЕРХУ
+   (идентичны кнопкам в карточках)
+   ============================================ */
+
+.catalog-page .catalog-filters {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.catalog-page .filter-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: var(--radius-small);
+    font-size: 14px;
+    font-weight: 500;
+    transition: var(--transition-fast);
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+/* ----- ИКОНКИ В КНОПКАХ-ФИЛЬТРАХ (ВСЕГДА ЦВЕТНЫЕ PNG) ----- */
+.catalog-page .filter-btn img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    display: inline-block;
+    filter: none !important; /* НИКОГДА не делаем иконки белыми */
+}
+
+/* ----- КНОПКА "ВСЕ ТОВАРЫ" (ЗОЛОТАЯ) ----- */
+.catalog-page .filter-btn[data-filter="all"] {
+    background: #f5f0e8;
+    color: #b8963e;
+    border-color: #e8e0d0;
+}
+
+.catalog-page .filter-btn[data-filter="all"]:hover,
+.catalog-page .filter-btn[data-filter="all"].active {
+    background: var(--color-gold);
+    color: white;
+    border-color: var(--color-gold);
+    box-shadow: var(--shadow-button);
+    transform: scale(1.05);
+}
+
+/* ----- КНОПКА ВКУСВИЛЛ ----- */
+.catalog-page .filter-btn[data-filter="vkusvill"] {
+    background: #E8F5E9;
+    color: #2E7D32;
+    border-color: #A5D6A7;
+}
+
+.catalog-page .filter-btn[data-filter="vkusvill"]:hover,
+.catalog-page .filter-btn[data-filter="vkusvill"].active {
+    background: #C8E6C9;
+    border-color: #81C784;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+}
+
+/* ----- КНОПКА ЯНДЕКС ЛАВКА ----- */
+.catalog-page .filter-btn[data-filter="lavka"] {
+    background: #E3F2FD;
+    color: #0D47A1;
+    border-color: #90CAF9;
+}
+
+.catalog-page .filter-btn[data-filter="lavka"]:hover,
+.catalog-page .filter-btn[data-filter="lavka"].active {
+    background: #BBDEFB;
+    border-color: #64B5F6;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
+}
+
+/* ----- КНОПКА САМОКАТ ----- */
+.catalog-page .filter-btn[data-filter="samokat"] {
+    background: #FFF3E0;
+    color: #E65100;
+    border-color: #FFCC80;
+}
+
+.catalog-page .filter-btn[data-filter="samokat"]:hover,
+.catalog-page .filter-btn[data-filter="samokat"].active {
+    background: #FFE0B2;
+    border-color: #FFA726;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(255, 152, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .catalog-header h1 {
+        font-size: 32px;
+    }
+}

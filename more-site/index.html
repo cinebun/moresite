@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ООО МОРЕ — поставщик во ВкусВилл, Яндекс Лавка и Самокат</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+    <!-- ==========================================
+    ШАПКА
+    ========================================== -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-text">ООО «МОРЕ»</span>
+            </a>
+            <nav class="nav">
+                <a href="pages/catalog.html">Каталог</a>
+                <a href="pages/about.html">О компании</a>
+                <a href="pages/contacts.html">Контакты</a>
+            </nav>
+            <div class="header-contacts">
+                <span class="phone">+7 (905) 147-98-98</span>
+                <a href="mailto:info@more.ru" class="email">info@more.ru</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==========================================
+    ГЕРОЙ-БАННЕР
+    ========================================== -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>ООО &laquo;МОРЕ&raquo;</h1>
+                <p class="subtitle">Надёжный поставщик сырья для ведущих сетей</p>
+                <p class="description">
+                    Прямые поставки в <strong>ВкусВилл</strong>, <strong>Яндекс Лавка</strong> и <strong>Самокат</strong>
+                </p>
+                <div class="hero-buttons">
+                    <a href="pages/catalog.html" class="btn btn-primary">Смотреть каталог</a>
+                    <a href="pages/contacts.html" class="btn btn-outline">Стать партнёром</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+    ПАРТНЁРЫ
+    ========================================== -->
+    <section class="partners">
+        <div class="container">
+            <h2>Наши партнёры</h2>
+            <div class="partners-grid">
+                <div class="partner-item">
+                    <img src="images/icons/vkusvill.png" alt="ВкусВилл" class="partner-icon" />
+                    <span>ВкусВилл</span>
+                </div>
+                <div class="partner-item">
+                    <img src="images/icons/lavka.png" alt="Яндекс Лавка" class="partner-icon" />
+                    <span>Яндекс Лавка</span>
+                </div>
+                <div class="partner-item">
+                    <img src="images/icons/samokat.png" alt="Самокат" class="partner-icon" />
+                    <span>Самокат</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+    КАТАЛОГ ТОВАРОВ (ГЛАВНАЯ)
+    ========================================== -->
+    <section class="catalog">
+        <div class="container">
+            <h2>Ассортимент</h2>
+            <p class="catalog-subtitle">Свежее сырьё напрямую от производителя</p>
+
+            <!-- Фильтры -->
+            <div class="catalog-filters">
+                <button class="filter-btn active" data-filter="day">Товар дня</button>
+                <a href="pages/catalog.html" class="filter-btn catalog-link">Все товары</a>
+            </div>
+
+            <!-- Сетка товаров (заполняется из JS) -->
+            <div class="products-grid" id="productsGrid"></div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+    О КОМПАНИИ (КРАТКО)
+    ========================================== -->
+    <section class="about-short">
+        <div class="container">
+            <div class="about-short-content">
+                <h2>ООО &laquo;МОРЕ&raquo; — производитель №1</h2>
+                <p>
+                    Мы поставляем свежее сырьё в крупнейшие сети России.
+                    Собственное производство, контроль качества и выгодные цены.
+                </p>
+                <div class="about-stats">
+                    <div>
+                        <span>10+</span> лет на рынке
+                    </div>
+                    <div>
+                        <span>50+</span> поставок в месяц
+                    </div>
+                    <div>
+                        <span>100%</span> качество
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+    ПОДВАЛ
+    ========================================== -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div>
+                <h4>ООО &laquo;МОРЕ&raquo;</h4>
+                <p>ИНН: <span class="gold">9722053150</span></p>
+                <p>г. Владимир</p>
+            </div>
+            <div>
+                <h4>Контакты</h4>
+                <p>+7 (905) 147-98-98</p>
+                <p>info@more.ru</p>
+            </div>
+            <div>
+                <h4>Партнёры</h4>
+                <p>ВкусВилл</p>
+                <p>Яндекс Лавка</p>
+                <p>Самокат</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 ООО &laquo;МОРЕ&raquo;. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

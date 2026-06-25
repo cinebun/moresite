@@ -1,0 +1,263 @@
+/* ============================================
+   СТРАНИЦА "О КОМПАНИИ"
+   ============================================ */
+
+.about-page {
+    padding: 60px 0 80px;
+    min-height: 70vh;
+    background: var(--color-white);
+}
+
+.about-page .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.about-content {
+    flex: 1;
+    background: var(--color-white);
+    padding: 50px 50px 40px;
+    border-radius: var(--radius-card);
+    border: 1px solid rgba(201, 169, 110, 0.25);
+    box-shadow: var(--shadow-card);
+    position: relative;
+    transition: var(--transition-smooth);
+}
+
+.about-content:hover {
+    box-shadow: var(--shadow-hover);
+}
+
+.about-content::before {
+    content: '';
+    position: absolute;
+    top: -18px;
+    right: -18px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid var(--color-gold);
+    background: var(--color-white);
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.about-content::after {
+    content: '';
+    position: absolute;
+    bottom: -18px;
+    left: -18px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid var(--color-gold);
+    background: var(--color-white);
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.about-content .circle-1 {
+    position: absolute;
+    top: 50%;
+    left: -30px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--color-gold);
+    opacity: 0.2;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.about-content .circle-2 {
+    position: absolute;
+    top: 50%;
+    right: -30px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--color-gold);
+    opacity: 0.2;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.about-content h1 {
+    font-family: var(--font-accent);
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--color-gold);
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.about-subtitle {
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--color-text);
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.about-text p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--color-text);
+    margin-bottom: 14px;
+}
+
+.about-text p strong {
+    color: var(--color-gold);
+    font-weight: 600;
+}
+
+.about-facts {
+    display: flex;
+    gap: 50px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(201, 169, 110, 0.2);
+}
+
+.fact-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fact-number {
+    font-family: var(--font-accent);
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--color-gold);
+    line-height: 1.2;
+}
+
+.fact-label {
+    font-size: 14px;
+    color: var(--color-text-light);
+    margin-top: 4px;
+}
+
+.about-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 500px;
+}
+
+.about-image img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.08));
+}
+
+.float-image {
+    animation: float 4s ease-in-out infinite;
+}
+
+.float-image:hover {
+    animation-duration: 1.5s;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-12px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@media (max-width: 992px) {
+    .about-page .container {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .about-content {
+        padding: 35px 25px 30px;
+    }
+
+    .about-content::before,
+    .about-content::after {
+        width: 40px;
+        height: 40px;
+    }
+
+    .about-content .circle-1,
+    .about-content .circle-2 {
+        display: none;
+    }
+
+    .about-facts {
+        justify-content: center;
+        gap: 30px;
+    }
+
+    .about-image {
+        max-width: 300px;
+    }
+
+    .about-image img {
+        max-width: 280px;
+    }
+}
+
+@media (max-width: 576px) {
+    .about-content h1 {
+        font-size: 34px;
+    }
+
+    .about-subtitle {
+        font-size: 17px;
+    }
+
+    .about-content {
+        padding: 25px 18px 24px;
+    }
+
+    .about-content::before,
+    .about-content::after {
+        width: 28px;
+        height: 28px;
+        top: -10px;
+        right: -10px;
+        bottom: -10px;
+        left: -10px;
+    }
+
+    .about-content .circle-1,
+    .about-content .circle-2 {
+        display: none;
+    }
+
+    .about-facts {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .fact-number {
+        font-size: 28px;
+    }
+
+    .about-image {
+        max-width: 200px;
+    }
+
+    .about-image img {
+        max-width: 180px;
+    }
+}

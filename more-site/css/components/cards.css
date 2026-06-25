@@ -1,0 +1,169 @@
+/* ============================================
+   КАРТОЧКИ ТОВАРОВ
+   ============================================ */
+
+.product-card {
+    background: var(--color-white);
+    border-radius: var(--radius-card);
+    padding: 20px 20px 70px 20px;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+    max-width: 380px;
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.product-card:hover {
+    transform: translateY(-12px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--color-gold);
+}
+
+.product-card .product-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 14px;
+    background: var(--color-gray-light);
+    flex-shrink: 0;
+}
+
+.product-card .product-name {
+    font-family: var(--font-accent);
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--color-dark);
+    margin-bottom: 2px;
+    line-height: 1.3;
+    flex-shrink: 0;
+}
+
+.product-card .product-weight {
+    font-size: 14px;
+    color: var(--color-text-light);
+    font-weight: 400;
+    display: block;
+    margin-bottom: 6px;
+    flex-shrink: 0;
+}
+
+.product-card .product-price {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--color-gold);
+    margin: 6px 0 14px;
+    flex-shrink: 0;
+}
+
+/* ----- КНОПКИ В КАРТОЧКАХ (СВЕТЛЫЕ, С ЦВЕТНЫМИ ИКОНКАМИ) ----- */
+.product-card .partner-links {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    background: var(--color-white);
+}
+
+.product-card .partner-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: var(--radius-small);
+    font-size: 14px;
+    font-weight: 500;
+    transition: var(--transition-fast);
+    border: 1px solid transparent;
+    text-decoration: none;
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+}
+
+/* ----- ИКОНКИ В КНОПКАХ (ВСЕГДА ЦВЕТНЫЕ PNG) ----- */
+.product-card .partner-links a img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    display: inline-block;
+    filter: none !important; /* НИКОГДА не делаем иконки белыми */
+}
+
+/* ----- КНОПКА ВКУСВИЛЛ ----- */
+.product-card .link-vkusvill {
+    background: #E8F5E9;
+    color: #2E7D32;
+    border-color: #A5D6A7;
+}
+
+.product-card .link-vkusvill:hover {
+    background: #C8E6C9;
+    border-color: #81C784;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+}
+
+/* ----- КНОПКА ЯНДЕКС ЛАВКА ----- */
+.product-card .link-lavka {
+    background: #E3F2FD;
+    color: #0D47A1;
+    border-color: #90CAF9;
+}
+
+.product-card .link-lavka:hover {
+    background: #BBDEFB;
+    border-color: #64B5F6;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
+}
+
+/* ----- КНОПКА САМОКАТ ----- */
+.product-card .link-samokat {
+    background: #FFF3E0;
+    color: #E65100;
+    border-color: #FFCC80;
+}
+
+.product-card .link-samokat:hover {
+    background: #FFE0B2;
+    border-color: #FFA726;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(255, 152, 0, 0.2);
+}
+
+.product-card .link-placeholder {
+    background: var(--color-gray-light);
+    color: var(--color-text-light);
+    cursor: default;
+    opacity: 0.7;
+}
+
+.product-card .link-placeholder:hover {
+    background: var(--color-gray-light);
+    color: var(--color-text-light);
+    transform: none;
+    box-shadow: none;
+}
+
+/* ----- КАРТИНКИ ЛАВКА И САМОКАТ ----- */
+.product-card[data-shop="lavka"] .product-image,
+.product-card[data-shop="samokat"] .product-image {
+    object-fit: contain;
+    background: var(--color-gray-light);
+    padding: 8px;
+    height: 220px;
+    width: 100%;
+}
