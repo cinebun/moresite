@@ -7,52 +7,7 @@
   <link rel="stylesheet" href="https://unpkg.com/netlify-cms@^2.0.0/dist/cms.css" />
 </head>
 <body>
-  <!-- ВСТРОЕННАЯ СТРАНИЦА ВХОДА NETLIFY IDENTITY -->
-  <div id="root"></div>
+  <!-- НЕТ НИКАКИХ НАСТРОЕК ВНУТРИ — ВСЁ В config.yml -->
   <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
-  <script>
-    // ОТКЛЮЧАЕМ АВТОМАТИЧЕСКИЙ РЕДИРЕКТ, ЧТОБЫ ПОКАЗАТЬ ФОРМУ ВХОДА
-    window.CMS_MANUAL_INIT = true;
-  </script>
-  <script>
-    // ЗАГРУЖАЕМ НАСТРОЙКИ ИЗ config.yml
-    (function() {
-      var script = document.createElement('script');
-      script.src = 'https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js';
-      script.onload = function() {
-        CMS.init({
-          config: {
-            backend: {
-              name: 'git-gateway',
-              branch: 'main'
-            },
-            media_folder: 'images/products',
-            public_folder: '/images/products',
-            collections: [
-              {
-                name: 'products',
-                label: 'Товары',
-                folder: 'data',
-                create: true,
-                slug: '{{slug}}',
-                fields: [
-                  { label: 'ID', name: 'id', widget: 'number', required: true },
-                  { label: 'Название', name: 'name', widget: 'string' },
-                  { label: 'Вес', name: 'weight', widget: 'string' },
-                  { label: 'Цена', name: 'price', widget: 'string' },
-                  { label: 'Категория', name: 'category', widget: 'string' },
-                  { label: 'Изображение', name: 'image', widget: 'image' },
-                  { label: 'Магазин', name: 'shop', widget: 'string' },
-                  { label: 'Ссылка', name: 'link', widget: 'string' },
-                  { label: 'Название магазина', name: 'shopLabel', widget: 'string' }
-                ]
-              }
-            ]
-          }
-        });
-      };
-      document.head.appendChild(script);
-    })();
-  </script>
 </body>
 </html>
