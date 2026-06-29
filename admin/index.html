@@ -43,7 +43,6 @@
     .login-box button:hover { background: #b8963e; }
     .error { color: #d32f2f; text-align: center; margin-top: 12px; display: none; }
 
-    /* Стили для админки */
     .admin-header {
       background: #1A1A1A;
       color: white;
@@ -168,9 +167,7 @@
 </head>
 <body>
 
-<!-- ============================================ -->
 <!-- СТРАНИЦА ВХОДА -->
-<!-- ============================================ -->
 <div id="loginPage" class="login-box">
   <h1>🔐 Вход в админку</h1>
   <p>Введите логин и пароль</p>
@@ -180,9 +177,7 @@
   <div id="errorMessage" class="error">Неверный логин или пароль</div>
 </div>
 
-<!-- ============================================ -->
-<!-- АДМИН-ПАНЕЛЬ -->
-<!-- ============================================ -->
+<!-- АДМИНКА -->
 <div id="adminPanel" style="display:none;">
   <div class="admin-header">
     <span>🛒 Управление товарами</span>
@@ -196,9 +191,7 @@
   </div>
 </div>
 
-<!-- ============================================ -->
-<!-- МОДАЛЬНОЕ ОКНО ДЛЯ ДОБАВЛЕНИЯ/РЕДАКТИРОВАНИЯ -->
-<!-- ============================================ -->
+<!-- МОДАЛКА -->
 <div id="modal" class="modal">
   <div class="modal-content">
     <h2 id="modalTitle">Добавить товар</h2>
@@ -208,7 +201,7 @@
     <input type="text" id="editWeight" />
     <label>Цена</label>
     <input type="text" id="editPrice" />
-    <label>Категория (магазин)</label>
+    <label>Магазин</label>
     <select id="editShop">
       <option value="vkusvill">ВкусВилл</option>
       <option value="lavka">Яндекс Лавка</option>
@@ -218,8 +211,8 @@
     <input type="text" id="editLink" />
     <label>Название магазина (для кнопки)</label>
     <input type="text" id="editShopLabel" />
-    <label>Путь к картинке (например: images/products/dorado.jpg)</label>
-    <input type="text" id="editImage" />
+    <label>Путь к картинке</label>
+    <input type="text" id="editImage" placeholder="images/products/dorado.jpg" />
 
     <button class="btn-save" onclick="saveProduct()">Сохранить</button>
     <button class="btn-close" onclick="closeModal()">Отмена</button>
@@ -227,18 +220,12 @@
 </div>
 
 <script>
-  // ============================================
-  // НАСТРОЙКИ ВХОДА
-  // ============================================
   const ADMIN_USERNAME = 'da4409275@gmail.com';
   const ADMIN_PASSWORD = 'B2J-uJF-Ye5-cY6';
 
   let editingId = null;
   let products = [];
 
-  // ============================================
-  // ВХОД / ВЫХОД
-  // ============================================
   function login() {
     const username = document.getElementById('loginUsername').value;
     const password = document.getElementById('loginPassword').value;
@@ -259,51 +246,33 @@
     location.reload();
   }
 
-  // Проверяем, залогинен ли уже
   if (sessionStorage.getItem('adminLoggedIn') === 'true') {
     document.getElementById('loginPage').style.display = 'none';
     document.getElementById('adminPanel').style.display = 'block';
     loadProducts();
   }
 
-  // Enter для входа
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Enter' && document.getElementById('loginPage').style.display !== 'none') {
       login();
     }
   });
 
-  // ============================================
-  // ЗАГРУЗКА ТОВАРОВ ИЗ JSON
-  // ============================================
   function loadProducts() {
     const container = document.getElementById('productsContainer');
     container.innerHTML = '<div class="loading">Загрузка...</div>';
 
-    // Пробуем загрузить с сервера
-    fetch('/data/products.json')
+    fetch('data/products.json')
       .then(res => res.json())
       .then(data => {
         products = data.products || [];
         renderProducts();
       })
       .catch(() => {
-        // Если не загрузилось — пробуем через GitHub Pages (относительный путь)
-        fetch('../data/products.json')
-          .then(res => res.json())
-          .then(data => {
-            products = data.products || [];
-            renderProducts();
-          })
-          .catch(() => {
-            container.innerHTML = '<div class="loading" style="color:#d32f2f;">Ошибка загрузки товаров. Попробуйте обновить страницу.</div>';
-          });
+        container.innerHTML = '<div class="loading" style="color:#d32f2f;">Ошибка загрузки товаров.</div>';
       });
   }
 
-  // ============================================
-  // ОТРИСОВКА ТОВАРОВ
-  // ============================================
   function renderProducts() {
     const container = document.getElementById('productsContainer');
 
@@ -331,9 +300,6 @@
     `;
   }
 
-  // ============================================
-  // ДОБАВЛЕНИЕ / РЕДАКТИРОВАНИЕ
-  // ============================================
   function openAddModal() {
     editingId = null;
     document.getElementById('modalTitle').textContent = '➕ Добавить товар';
@@ -381,13 +347,11 @@
     }
 
     if (editingId !== null) {
-      // Редактируем
       const idx = products.findIndex(p => p.id === editingId);
       if (idx !== -1) {
         products[idx] = { ...products[idx], name, weight, price, shop, link, shopLabel, image };
       }
     } else {
-      // Добавляем
       const maxId = products.reduce((max, p) => Math.max(max, p.id), 0);
       products.push({
         id: maxId + 1,
@@ -406,9 +370,6 @@
     saveToJson();
   }
 
-  // ============================================
-  // УДАЛЕНИЕ
-  // ============================================
   function deleteProduct(id) {
     if (!confirm('Удалить товар?')) return;
     products = products.filter(p => p.id !== id);
@@ -416,9 +377,6 @@
     saveToJson();
   }
 
-  // ============================================
-  // СОХРАНЕНИЕ В JSON (через скачивание)
-  // ============================================
   function saveToJson() {
     const data = { products };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
