@@ -274,19 +274,43 @@
     }
   });
 
-  // ===== ЗАГРУЗКА ТОВАРОВ =====
+  // ===== ЗАГРУЗКА ТОВАРОВ (ПРАВИЛЬНЫЙ ПУТЬ) =====
   function loadProducts() {
     const container = document.getElementById('productsContainer');
     container.innerHTML = '<div class="loading">Загрузка...</div>';
 
-    fetch('data/products.json')
-      .then(res => res.json())
+    // ПРОБУЕМ ЗАГРУЗИТЬ ИЗ ПАПКИ data (правильный путь)
+    fetch('../data/products.json')
+      .then(res => {
+        if (!res.ok) throw new Error('Файл не найден');
+        return res.json();
+      })
       .then(data => {
         products = data.products || [];
         renderProducts();
       })
       .catch(() => {
-        container.innerHTML = '<div class="loading" style="color:#d32f2f;">Ошибка загрузки товаров.</div>';
+        // Если не получилось — пробуем другой путь
+        fetch('data/products.json')
+          .then(res => {
+            if (!res.ok) throw new Error('Файл не найден');
+            return res.json();
+          })
+          .then(data => {
+            products = data.products || [];
+            renderProducts();
+          })
+          .catch(() => {
+            container.innerHTML = `
+              <div class="loading" style="color:#d32f2f;">
+                ❌ Ошибка загрузки товаров.<br />
+                <span style="font-size:14px;color:#999;">
+                  Файл data/products.json не найден.<br />
+                  Проверьте, что он существует в репозитории.
+                </span>
+              </div>
+            `;
+          });
       });
   }
 
@@ -372,7 +396,6 @@
       const preview = document.getElementById('editImagePreview');
       preview.src = ev.target.result;
       preview.className = 'preview active';
-      // Сохраняем как base64 (для простоты)
       document.getElementById('editImage').value = ev.target.result;
     };
     reader.readAsDataURL(file);
@@ -393,7 +416,6 @@
       return;
     }
 
-    // Если картинка не загружена, ставим заглушку
     if (!image) {
       image = 'https://placehold.co/300x200/eee/ccc?text=Нет+фото';
     }
