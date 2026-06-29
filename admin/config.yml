@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: cinebun/moresite
   branch: main
 
 media_folder: "images/products"

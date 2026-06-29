@@ -3,41 +3,106 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Админ-панель — ООО МОРЕ</title>
-  <!-- Подключаем виджет Netlify Identity -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <title>Вход в админку</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .login-box {
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+    .login-box h1 {
+      font-size: 24px;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    .login-box p {
+      color: #666;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      background: #C9A96E;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .login-box button:hover {
+      background: #b8963e;
+    }
+    .error {
+      color: #d32f2f;
+      font-size: 14px;
+      text-align: center;
+      margin-top: 12px;
+      display: none;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- САМА CMS -->
-  <div id="root"></div>
-  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+<div class="login-box">
+  <h1>🔐 Вход в админку</h1>
+  <p>Введите логин и пароль</p>
 
-  <script>
-    // Ждём загрузки виджета
-    const netlifyIdentity = window.netlifyIdentity;
+  <input type="text" id="loginUsername" placeholder="Логин" />
+  <input type="password" id="loginPassword" placeholder="Пароль" />
+  <button onclick="login()">Войти</button>
 
-    if (netlifyIdentity) {
-      // Инициализируем виджет
-      netlifyIdentity.init();
+  <div id="errorMessage" class="error">Неверный логин или пароль</div>
+</div>
 
-      // При успешном входе — перенаправляем в админку
-      netlifyIdentity.on('login', function(user) {
-        window.location.href = '/admin/dashboard.html';
-      });
+<script>
+  // 📌 НАСТРОЙКИ ВХОДА
+  const ADMIN_USERNAME = 'da4409275@gmail.com';
+  const ADMIN_PASSWORD = 'B2J-uJF-Ye5-cY6';
 
-      // При выходе — возвращаем на страницу входа
-      netlifyIdentity.on('logout', function() {
-        window.location.href = '/admin/';
-      });
+  function login() {
+    const username = document.getElementById('loginUsername').value;
+    const password = document.getElementById('loginPassword').value;
+    const errorEl = document.getElementById('errorMessage');
 
-      // Если пользователь уже залогинен — сразу в админку
-      const user = netlifyIdentity.currentUser();
-      if (user) {
-        window.location.href = '/admin/dashboard.html';
-      }
+    if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+      sessionStorage.setItem('adminLoggedIn', 'true');
+      window.location.href = 'dashboard.html';
+    } else {
+      errorEl.style.display = 'block';
     }
-  </script>
+  }
+
+  // Вход по Enter
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') login();
+  });
+</script>
 
 </body>
 </html>
