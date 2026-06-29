@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Управление товарами</title>
+  <title>Управление товарами — ООО МОРЕ</title>
+  <!-- Стили CMS -->
   <link rel="stylesheet" href="https://unpkg.com/netlify-cms@^2.0.0/dist/cms.css" />
   <style>
     body { margin: 0; font-family: system-ui, sans-serif; }
@@ -24,34 +25,39 @@
       text-decoration: underline;
     }
   </style>
+  <!-- Подключаем Identity для проверки и выхода -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
+
+  <!-- ШАПКА АДМИНКИ -->
   <div class="admin-header">
     <span>🛒 Управление товарами</span>
     <a href="#" onclick="logout()">Выйти</a>
   </div>
 
+  <!-- CMS -->
   <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
   <script>
     function logout() {
       const netlifyIdentity = window.netlifyIdentity;
       if (netlifyIdentity) {
         netlifyIdentity.logout();
-        document.location.href = '/admin/';
+        window.location.href = '/admin/';
       }
     }
 
-    // Проверяем, что пользователь авторизован
+    // Если пользователь не залогинен — возвращаем на вход
     const netlifyIdentity = window.netlifyIdentity;
     if (netlifyIdentity) {
       netlifyIdentity.init();
       const user = netlifyIdentity.currentUser();
       if (!user) {
-        document.location.href = '/admin/';
+        window.location.href = '/admin/';
       }
     }
   </script>
+
 </body>
 </html>

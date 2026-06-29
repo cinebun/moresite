@@ -4,23 +4,40 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Админ-панель — ООО МОРЕ</title>
-  <link rel="stylesheet" href="https://unpkg.com/netlify-cms@^2.0.0/dist/cms.css" />
+  <!-- Подключаем виджет Netlify Identity -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
+
+  <!-- САМА CMS -->
+  <div id="root"></div>
   <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
 
   <script>
+    // Ждём загрузки виджета
     const netlifyIdentity = window.netlifyIdentity;
+
     if (netlifyIdentity) {
-      netlifyIdentity.on('login', function(user) {
-        document.location.href = '/admin/dashboard.html';
-      });
-      netlifyIdentity.on('logout', function() {
-        document.location.href = '/admin/';
-      });
+      // Инициализируем виджет
       netlifyIdentity.init();
+
+      // При успешном входе — перенаправляем в админку
+      netlifyIdentity.on('login', function(user) {
+        window.location.href = '/admin/dashboard.html';
+      });
+
+      // При выходе — возвращаем на страницу входа
+      netlifyIdentity.on('logout', function() {
+        window.location.href = '/admin/';
+      });
+
+      // Если пользователь уже залогинен — сразу в админку
+      const user = netlifyIdentity.currentUser();
+      if (user) {
+        window.location.href = '/admin/dashboard.html';
+      }
     }
   </script>
+
 </body>
 </html>
