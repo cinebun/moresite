@@ -126,7 +126,7 @@
       background: white;
       padding: 30px;
       border-radius: 16px;
-      max-width: 500px;
+      max-width: 600px;
       width: 100%;
       max-height: 90vh;
       overflow-y: auto;
@@ -141,6 +141,19 @@
       font-size: 14px;
       margin-top: 4px;
     }
+    .modal-content input[type="file"] {
+      padding: 8px;
+      background: #f9f9f9;
+      cursor: pointer;
+    }
+    .modal-content .preview {
+      margin-top: 8px;
+      max-width: 200px;
+      max-height: 120px;
+      border-radius: 8px;
+      display: none;
+    }
+    .modal-content .preview.active { display: block; }
     .modal-content .btn-save {
       margin-top: 16px;
       padding: 12px 24px;
@@ -208,11 +221,13 @@
       <option value="samokat">Самокат</option>
     </select>
     <label>Ссылка на товар</label>
-    <input type="text" id="editLink" />
+    <input type="text" id="editLink" placeholder="https://..." />
     <label>Название магазина (для кнопки)</label>
-    <input type="text" id="editShopLabel" />
-    <label>Путь к картинке</label>
-    <input type="text" id="editImage" placeholder="images/products/dorado.jpg" />
+    <input type="text" id="editShopLabel" placeholder="ВкусВилл" />
+    <label>Загрузить картинку</label>
+    <input type="file" id="editImageFile" accept="image/*" />
+    <img id="editImagePreview" class="preview" />
+    <input type="hidden" id="editImage" />
 
     <button class="btn-save" onclick="saveProduct()">Сохранить</button>
     <button class="btn-close" onclick="closeModal()">Отмена</button>
@@ -226,6 +241,7 @@
   let editingId = null;
   let products = [];
 
+  // ===== ВХОД =====
   function login() {
     const username = document.getElementById('loginUsername').value;
     const password = document.getElementById('loginPassword').value;
@@ -258,6 +274,7 @@
     }
   });
 
+  // ===== ЗАГРУЗКА ТОВАРОВ =====
   function loadProducts() {
     const container = document.getElementById('productsContainer');
     container.innerHTML = '<div class="loading">Загрузка...</div>';
@@ -300,6 +317,7 @@
     `;
   }
 
+  // ===== ОТКРЫТИЕ МОДАЛКИ =====
   function openAddModal() {
     editingId = null;
     document.getElementById('modalTitle').textContent = '➕ Добавить товар';
@@ -310,6 +328,9 @@
     document.getElementById('editLink').value = '';
     document.getElementById('editShopLabel').value = '';
     document.getElementById('editImage').value = '';
+    document.getElementById('editImagePreview').className = 'preview';
+    document.getElementById('editImagePreview').src = '';
+    document.getElementById('editImageFile').value = '';
     document.getElementById('modal').classList.add('active');
   }
 
@@ -325,6 +346,15 @@
     document.getElementById('editLink').value = p.link;
     document.getElementById('editShopLabel').value = p.shopLabel || p.shop;
     document.getElementById('editImage').value = p.image;
+    document.getElementById('editImageFile').value = '';
+    const preview = document.getElementById('editImagePreview');
+    if (p.image) {
+      preview.src = p.image;
+      preview.className = 'preview active';
+    } else {
+      preview.className = 'preview';
+      preview.src = '';
+    }
     document.getElementById('modal').classList.add('active');
   }
 
@@ -332,6 +362,23 @@
     document.getElementById('modal').classList.remove('active');
   }
 
+  // ===== ЗАГРУЗКА КАРТИНКИ =====
+  document.getElementById('editImageFile').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      const preview = document.getElementById('editImagePreview');
+      preview.src = ev.target.result;
+      preview.className = 'preview active';
+      // Сохраняем как base64 (для простоты)
+      document.getElementById('editImage').value = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // ===== СОХРАНЕНИЕ =====
   function saveProduct() {
     const name = document.getElementById('editName').value.trim();
     const weight = document.getElementById('editWeight').value.trim();
@@ -339,11 +386,16 @@
     const shop = document.getElementById('editShop').value;
     const link = document.getElementById('editLink').value.trim();
     const shopLabel = document.getElementById('editShopLabel').value.trim() || shop;
-    const image = document.getElementById('editImage').value.trim() || 'https://placehold.co/300x200/eee/ccc?text=Нет+фото';
+    let image = document.getElementById('editImage').value.trim();
 
     if (!name || !weight || !price) {
       alert('Заполните название, вес и цену!');
       return;
+    }
+
+    // Если картинка не загружена, ставим заглушку
+    if (!image) {
+      image = 'https://placehold.co/300x200/eee/ccc?text=Нет+фото';
     }
 
     if (editingId !== null) {
@@ -377,6 +429,7 @@
     saveToJson();
   }
 
+  // ===== СОХРАНЕНИЕ В JSON =====
   function saveToJson() {
     const data = { products };
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
