@@ -1,5 +1,5 @@
 // ============================================
-// ВСЕ ТОВАРЫ (с правильными shopLabel)
+// ВСЕ ТОВАРЫ (с правильными shopLabel и путями)
 // ============================================
 const products = [
     {
@@ -9,7 +9,7 @@ const products = [
         price: '1 750 ₽/кг',
         shop: 'vkusvill',
         link: 'https://vkusvill.ru/goods/xmlid/29326',
-        image: 'images/products/dorado.jpg',
+        image: '../images/products/dorado.jpg',
         shopLabel: 'ВкусВилл'
     },
     {
@@ -19,7 +19,7 @@ const products = [
         price: '608 ₽/шт',
         shop: 'vkusvill',
         link: 'https://vkusvill.ru/goods/xmlid/17103',
-        image: 'images/products/kalmar.jpg',
+        image: '../images/products/kalmar.jpg',
         shopLabel: 'ВкусВилл'
     },
     {
@@ -29,7 +29,7 @@ const products = [
         price: '1 147 ₽/шт',
         shop: 'vkusvill',
         link: 'https://vkusvill.ru/goods/xmlid/17661',
-        image: 'images/products/krevetki.jpg',
+        image: '../images/products/krevetki.jpg',
         shopLabel: 'ВкусВилл'
     },
     {
@@ -39,7 +39,7 @@ const products = [
         price: '490 ₽/шт',
         shop: 'vkusvill',
         link: 'https://vkusvill.ru/goods/xmlid/37746',
-        image: 'images/products/forel.jpg',
+        image: '../images/products/forel.jpg',
         shopLabel: 'ВкусВилл'
     },
     {
@@ -49,7 +49,7 @@ const products = [
         price: '635 ₽/шт',
         shop: 'vkusvill',
         link: 'https://vkusvill.ru/goods/xmlid/1173',
-        image: 'images/products/midii.jpg',
+        image: '../images/products/midii.jpg',
         shopLabel: 'ВкусВилл'
     },
     {
@@ -59,7 +59,7 @@ const products = [
         price: '642 ₽/шт',
         shop: 'vkusvill',
         link: 'https://vkusvill.ru/goods/xmlid/20480',
-        image: 'images/products/kokteyl.jpg',
+        image: '../images/products/kokteyl.jpg',
         shopLabel: 'ВкусВилл'
     },
     {
@@ -69,7 +69,7 @@ const products = [
         price: '1 287 ₽/шт',
         shop: 'vkusvill',
         link: 'https://vkusvill.ru/goods/xmlid/68903',
-        image: 'images/products/tunets.jpg',
+        image: '../images/products/tunets.jpg',
         shopLabel: 'ВкусВилл'
     },
     {
@@ -79,7 +79,7 @@ const products = [
         price: '454 ₽/шт',
         shop: 'lavka',
         link: 'https://lavka.yandex.ru/supermarket/good/krevetki-varyono-morozhenye-iz-lavki-severnye-nerazdelannye-500-gram',
-        image: 'images/products/krevetki-lavka.jpg',
+        image: '../images/products/krevetki-lavka.jpg',
         shopLabel: 'Яндекс Лавка'
     },
     {
@@ -89,7 +89,7 @@ const products = [
         price: '440 ₽/шт',
         shop: 'lavka',
         link: 'https://lavka.yandex.ru/supermarket/good/gorbusha-file-iz-lavki-na-kozhe-v-medovo-gorchichnom-souse-350-gram',
-        image: 'images/products/gorbusa-medovaya.jpg',
+        image: '../images/products/gorbusa-medovaya.jpg',
         shopLabel: 'Яндекс Лавка'
     },
     {
@@ -99,7 +99,7 @@ const products = [
         price: '405 ₽/шт',
         shop: 'lavka',
         link: 'https://lavka.yandex.ru/supermarket/good/treska-iz-lavki-file-porcionnoe-bez-kozhi-zamorozhennoe-400-gram',
-        image: 'images/products/treska-file.jpg',
+        image: '../images/products/treska-file.jpg',
         shopLabel: 'Яндекс Лавка'
     },
     {
@@ -109,7 +109,7 @@ const products = [
         price: '454 ₽/шт',
         shop: 'lavka',
         link: 'https://lavka.yandex.ru/supermarket/good/gorbusha-iz-lavki-file-porcionnoe-bez-kozhi-400-gram',
-        image: 'images/products/gorbusha-file.jpg',
+        image: '../images/products/gorbusha-file.jpg',
         shopLabel: 'Яндекс Лавка'
     },
     {
@@ -119,7 +119,7 @@ const products = [
         price: '300 ₽/шт',
         shop: 'lavka',
         link: 'https://lavka.yandex.ru/supermarket/good/mintaj-file-iz-lavki-bez-kozhi-zamorozhennyj-400-gram',
-        image: 'images/products/mintay-file.jpg',
+        image: '../images/products/mintay-file.jpg',
         shopLabel: 'Яндекс Лавка'
     },
     {
@@ -129,7 +129,7 @@ const products = [
         price: '335 ₽/шт',
         shop: 'lavka',
         link: 'https://lavka.yandex.ru/supermarket/good/medalony-iz-raduzhnoj-foreli-iz-lavki-zamorozhennye-180-gram',
-        image: 'images/products/forel-medalony.jpg',
+        image: '../images/products/forel-medalony.jpg',
         shopLabel: 'Яндекс Лавка'
     },
     {
@@ -139,7 +139,7 @@ const products = [
         price: '230 ₽/шт',
         shop: 'lavka',
         link: 'https://lavka.yandex.ru/supermarket/good/medalony-iz-gorbushi-dalnevostochnoj-iz-lavki-s-brokkoli-zamorozhennye-180-gram',
-        image: 'images/products/gorbusa-brokkoli.jpg',
+        image: '../images/products/gorbusa-brokkoli.jpg',
         shopLabel: 'Яндекс Лавка'
     },
     {
@@ -149,7 +149,7 @@ const products = [
         price: '699 ₽/шт',
         shop: 'lavka',
         link: 'https://lavka.yandex.ru/supermarket/good/treska-iz-lavki-file-spinki-bez-kozhi-zamorozhennaya-400-gram',
-        image: 'images/products/treska-loin.jpg',
+        image: '../images/products/treska-loin.jpg',
         shopLabel: 'Яндекс Лавка'
     },
     {
@@ -159,7 +159,7 @@ const products = [
         price: '384 ₽/шт',
         shop: 'lavka',
         link: 'https://lavka.yandex.ru/supermarket/good/kalmar-komandorskij-iz-lavki-tushka-ochishennyj-zamorozhennyj-400-gram',
-        image: 'images/products/kalmar-file.jpg',
+        image: '../images/products/kalmar-file.jpg',
         shopLabel: 'Яндекс Лавка'
     },
     {
@@ -169,7 +169,7 @@ const products = [
         price: '559 ₽/шт',
         shop: 'lavka',
         link: 'https://lavka.yandex.ru/supermarket/good/file-tunca-zheltopyorogo-iz-lavki-bez-kozhi-500-gram',
-        image: 'images/products/tunets-file.jpg',
+        image: '../images/products/tunets-file.jpg',
         shopLabel: 'Яндекс Лавка'
     },
     {
@@ -179,7 +179,7 @@ const products = [
         price: '804 ₽/шт',
         shop: 'lavka',
         link: 'https://lavka.yandex.ru/supermarket/good/forel-raduzhnaya-iz-lavki-kusok-stejkovyj-zamorozhennyj-500-gram',
-        image: 'images/products/forel-steak.jpg',
+        image: '../images/products/forel-steak.jpg',
         shopLabel: 'Яндекс Лавка'
     },
     {
@@ -189,7 +189,7 @@ const products = [
         price: '339 ₽/шт',
         shop: 'samokat',
         link: 'https://samokat.ru/product/913eaf8f-45b3-11ee-b971-08c0eb32008b?pcs=true',
-        image: 'images/products/hek.jpg',
+        image: '../images/products/hek.jpg',
         shopLabel: 'Самокат'
     },
     {
@@ -199,7 +199,7 @@ const products = [
         price: '379 ₽/шт',
         shop: 'samokat',
         link: 'https://samokat.ru/product/ef45ea54-09bc-11ee-885e-08c0eb32014b?pcs=true',
-        image: 'images/products/tunets-medalony.jpg',
+        image: '../images/products/tunets-medalony.jpg',
         shopLabel: 'Самокат'
     }
 ];
@@ -221,7 +221,6 @@ function renderCatalog(products) {
     grid.innerHTML = products.map(product => {
         const isPlaceholder = !product.link || product.link === '#';
         const linkClass = isPlaceholder ? 'link-placeholder' : `link-${product.shop}`;
-        // ИСПОЛЬЗУЕМ shopLabel ДЛЯ РУССКОГО НАЗВАНИЯ
         const linkContent = isPlaceholder
             ? '⏳ Скоро появится'
             : `<img src="../images/icons/${product.shop}.png" alt="${product.shopLabel}" /> ${product.shopLabel}`;
