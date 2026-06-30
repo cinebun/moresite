@@ -13,8 +13,32 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Название", name: "name", widget: "string" }
-      - { label: "Вес", name: "weight", widget: "string" }
-      - { label: "Цена", name: "price", widget: "string" }
+      
+      - label: "Вес (число)"
+        name: "weight"
+        widget: "number"
+        hint: "Например: 400 или 1000"
+      
+      - label: "Единица измерения веса"
+        name: "weight_unit"
+        widget: "select"
+        default: "г"
+        options:
+          - { label: "Грамм (г)", value: "г" }
+          - { label: "Килограмм (кг)", value: "кг" }
+      
+      - label: "Цена (число)"
+        name: "price"
+        widget: "number"
+        hint: "Например: 1750 или 608"
+      
+      - label: "Тип цены"
+        name: "price_type"
+        widget: "select"
+        default: "₽/кг"
+        options:
+          - { label: "₽/кг", value: "₽/кг" }
+          - { label: "₽/шт", value: "₽/шт" }
       
       - label: "Магазин"
         name: "shop"

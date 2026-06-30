@@ -1,16 +1,11 @@
-/* ============================================
-   ГЛАВНАЯ СТРАНИЦА — читает товары из JSON
-   ============================================ */
-
 document.addEventListener('DOMContentLoaded', function () {
 
   let allProducts = [];
 
-  // ----- 1. ЗАГРУЗКА ТОВАРОВ ИЗ JSON -----
   fetch('data/products.json')
     .then(response => response.json())
     .then(data => {
-      allProducts = data.products;
+      allProducts = data.products || [];
       const initialProducts = getProductsOfDay();
       renderProducts(initialProducts);
     })
@@ -21,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
 
-  // ----- 2. ПЕРЕМЕШИВАНИЕ МАССИВА -----
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -30,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function () {
     return array;
   }
 
-  // ----- 3. ВЫБОР ТОВАРОВ ДНЯ -----
   function getProductsOfDay() {
     const vkusvillProducts = allProducts.filter(p => p.shop === 'vkusvill');
     const lavkaProducts = allProducts.filter(p => p.shop === 'lavka');
@@ -44,12 +37,14 @@ document.addEventListener('DOMContentLoaded', function () {
     return shuffleArray([...selectedVkusvill, ...selectedLavka]);
   }
 
-  // ----- 4. ОТРИСОВКА КАРТОЧЕК -----
   function renderProducts(products) {
     const grid = document.getElementById('productsGrid');
     if (!grid) return;
 
     grid.innerHTML = products.map(product => {
+      const weightDisplay = product.weight ? `${product.weight} ${product.weight_unit || 'г'}` : '';
+      const priceDisplay = product.price ? `${product.price} ${product.price_type || '₽/кг'}` : '';
+
       const isPlaceholder = product.link === '#';
       const linkClass = isPlaceholder ? 'link-placeholder' : `link-${product.shop}`;
       const linkContent = isPlaceholder
@@ -60,8 +55,8 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="product-card" data-shop="${product.shop}">
           <img class="product-image" src="${product.image}" alt="${product.name}" loading="lazy" />
           <h3 class="product-name">${product.name}</h3>
-          <span class="product-weight">${product.weight}</span>
-          <div class="product-price">${product.price}</div>
+          <span class="product-weight">${weightDisplay}</span>
+          <div class="product-price">${priceDisplay}</div>
           <div class="partner-links">
             <a href="${product.link}" target="_blank" class="${linkClass}">${linkContent}</a>
           </div>
@@ -72,7 +67,6 @@ document.addEventListener('DOMContentLoaded', function () {
     initScrollAnimations();
   }
 
-  // ----- 5. КНОПКА "ТОВАР ДНЯ" -----
   function initProductOfDay() {
     const btn = document.querySelector('.filter-btn[data-filter="day"]');
     if (!btn) return;
@@ -86,7 +80,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ----- 6. АНИМАЦИЯ ПРИ СКРОЛЛЕ -----
   function initScrollAnimations() {
     const cards = document.querySelectorAll('.product-card');
     const observer = new IntersectionObserver((entries) => {
@@ -109,7 +102,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ----- 7. ИНЪЕКЦИЯ CSS-АНИМАЦИИ -----
   function injectAnimationStyles() {
     const style = document.createElement('style');
     style.textContent = `
@@ -121,7 +113,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.head.appendChild(style);
   }
 
-  // ----- 8. ЗАПУСК -----
   injectAnimationStyles();
   initProductOfDay();
 

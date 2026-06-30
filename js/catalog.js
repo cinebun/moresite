@@ -1,29 +1,22 @@
-/* ============================================
-   СТРАНИЦА КАТАЛОГА — читает товары из JSON
-   ============================================ */
-
 document.addEventListener('DOMContentLoaded', function () {
 
-  // ----- 1. ЗАГРУЗКА ТОВАРОВ ИЗ JSON -----
   fetch('data/products.json')
     .then(response => response.json())
     .then(data => {
       renderCatalog(data.products);
     })
     .catch(() => {
-      // Если JSON не загрузился — показываем ошибку
-      const grid = document.getElementById('catalogGrid');
-      if (grid) {
-        grid.innerHTML = '<p style="text-align:center;padding:40px;">Не удалось загрузить товары. Пожалуйста, обновите страницу.</p>';
-      }
+      renderCatalog([]);
     });
 
-  // ----- 2. ОТРИСОВКА ТОВАРОВ -----
   function renderCatalog(products) {
     const grid = document.getElementById('catalogGrid');
     if (!grid) return;
 
     grid.innerHTML = products.map(product => {
+      const weightDisplay = product.weight ? `${product.weight} ${product.weight_unit || 'г'}` : '';
+      const priceDisplay = product.price ? `${product.price} ${product.price_type || '₽/кг'}` : '';
+
       const isPlaceholder = product.link === '#';
       const linkClass = isPlaceholder ? 'link-placeholder' : `link-${product.shop}`;
       const linkContent = isPlaceholder
@@ -32,10 +25,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
       return `
         <div class="product-card" data-shop="${product.shop}">
-          <img class="product-image" src="../${product.image}" alt="${product.name}" loading="lazy" />
+          <img class="product-image" src="${product.image}" alt="${product.name}" loading="lazy" />
           <h3 class="product-name">${product.name}</h3>
-          <span class="product-weight">${product.weight}</span>
-          <div class="product-price">${product.price}</div>
+          <span class="product-weight">${weightDisplay}</span>
+          <div class="product-price">${priceDisplay}</div>
           <div class="partner-links">
             <a href="${product.link}" target="_blank" class="${linkClass}">${linkContent}</a>
           </div>
