@@ -4,7 +4,7 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    // ----- 1. ВСЕ ТОВАРЫ (ПОЛНЫЙ СПИСОК) -----
+    // ----- 1. ВСЕ ТОВАРЫ (с правильными путями к картинкам) -----
     const allProducts = [
         // === ВкусВилл (7) ===
         {
