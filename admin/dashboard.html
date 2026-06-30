@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Управление товарами</title>
   <link rel="stylesheet" href="https://unpkg.com/netlify-cms@^2.0.0/dist/cms.css" />
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <style>
     body { margin: 0; font-family: system-ui, sans-serif; }
     .admin-header {
@@ -29,18 +30,17 @@
   </div>
   <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
   <script>
-    // Проверяем, залогинен ли пользователь (через Netlify Identity)
-    if (window.netlifyIdentity) {
-      const netlifyIdentity = window.netlifyIdentity;
+    const netlifyIdentity = window.netlifyIdentity;
+    if (netlifyIdentity) {
       netlifyIdentity.init();
       if (!netlifyIdentity.currentUser()) {
-        window.location.href = '/admin/index.html';
+        window.location.href = '/admin/';
       }
     }
     function logout() {
       if (window.netlifyIdentity) {
         window.netlifyIdentity.logout();
-        window.location.href = '/admin/index.html';
+        window.location.href = '/admin/';
       }
     }
   </script>
