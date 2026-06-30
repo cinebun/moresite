@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function () {
             weight: '300 г',
             price: '379 ₽/шт',
             category: 'samokat',
-            image: '../images/products/tunets.jpg',
+            image: '../images/products/tunets_brokkoli.jpg',
             shop: 'samokat',
             link: 'https://samokat.ru/product/ef45ea54-09bc-11ee-885e-08c0eb32014b?pcs=true',
             shopLabel: 'Самокат'
