@@ -42,23 +42,47 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!grid) return;
 
     grid.innerHTML = products.map(product => {
-      const weightDisplay = product.weight ? `${product.weight} ${product.weight_unit || 'г'}` : '';
-      const priceDisplay = product.price ? `${product.price} ${product.price_type || '₽/кг'}` : '';
+      let weightDisplay = '';
+      if (product.weight) {
+        weightDisplay = `${product.weight} ${product.weight_unit || 'г'}`;
+      }
 
-      const isPlaceholder = product.link === '#';
+      let priceDisplay = '';
+      if (product.price) {
+        priceDisplay = `${product.price} ${product.price_type || '₽/кг'}`;
+      }
+
+      // Поддержка старого формата
+      if (!product.weight_unit && typeof product.weight === 'string') {
+        const weightMatch = product.weight.match(/(\d+)\s*(г|кг)/);
+        if (weightMatch) {
+          product.weight = parseInt(weightMatch[1]);
+          product.weight_unit = weightMatch[2];
+        }
+      }
+      if (!product.price_type && typeof product.price === 'string') {
+        const priceMatch = product.price.match(/(\d+)\s*₽\/(кг|шт)/);
+        if (priceMatch) {
+          product.price = parseInt(priceMatch[1]);
+          product.price_type = `₽/${priceMatch[2]}`;
+        }
+      }
+
+      const isPlaceholder = !product.link || product.link === '#';
       const linkClass = isPlaceholder ? 'link-placeholder' : `link-${product.shop}`;
+      const shopLabel = product.shopLabel || product.shop || 'Магазин';
       const linkContent = isPlaceholder
         ? '⏳ Скоро появится'
-        : `<img src="images/icons/${product.shop}.png" alt="${product.shopLabel}" /> ${product.shopLabel}`;
+        : `<img src="images/icons/${product.shop}.png" alt="${shopLabel}" /> ${shopLabel}`;
 
       return `
-        <div class="product-card" data-shop="${product.shop}">
-          <img class="product-image" src="${product.image}" alt="${product.name}" loading="lazy" />
-          <h3 class="product-name">${product.name}</h3>
+        <div class="product-card" data-shop="${product.shop || 'vkusvill'}">
+          <img class="product-image" src="${product.image || 'https://placehold.co/300x200/eee/ccc?text=Нет+фото'}" alt="${product.name}" loading="lazy" />
+          <h3 class="product-name">${product.name || 'Без названия'}</h3>
           <span class="product-weight">${weightDisplay}</span>
           <div class="product-price">${priceDisplay}</div>
           <div class="partner-links">
-            <a href="${product.link}" target="_blank" class="${linkClass}">${linkContent}</a>
+            <a href="${product.link || '#'}" target="_blank" class="${linkClass}">${linkContent}</a>
           </div>
         </div>
       `;

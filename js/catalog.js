@@ -14,23 +14,50 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!grid) return;
 
     grid.innerHTML = products.map(product => {
-      const weightDisplay = product.weight ? `${product.weight} ${product.weight_unit || 'г'}` : '';
-      const priceDisplay = product.price ? `${product.price} ${product.price_type || '₽/кг'}` : '';
+      // ФОРМИРУЕМ ВЕС
+      let weightDisplay = '';
+      if (product.weight) {
+        weightDisplay = `${product.weight} ${product.weight_unit || 'г'}`;
+      }
 
-      const isPlaceholder = product.link === '#';
+      // ФОРМИРУЕМ ЦЕНУ
+      let priceDisplay = '';
+      if (product.price) {
+        priceDisplay = `${product.price} ${product.price_type || '₽/кг'}`;
+      }
+
+      // ЕСЛИ СТАРЫЙ ФОРМАТ (СТРОКИ) — ПЫТАЕМСЯ ИХ ПРЕОБРАЗОВАТЬ
+      if (!product.weight_unit && typeof product.weight === 'string') {
+        // Например, "400 г" → { weight: 400, weight_unit: "г" }
+        const weightMatch = product.weight.match(/(\d+)\s*(г|кг)/);
+        if (weightMatch) {
+          product.weight = parseInt(weightMatch[1]);
+          product.weight_unit = weightMatch[2];
+        }
+      }
+      if (!product.price_type && typeof product.price === 'string') {
+        const priceMatch = product.price.match(/(\d+)\s*₽\/(кг|шт)/);
+        if (priceMatch) {
+          product.price = parseInt(priceMatch[1]);
+          product.price_type = `₽/${priceMatch[2]}`;
+        }
+      }
+
+      const isPlaceholder = !product.link || product.link === '#';
       const linkClass = isPlaceholder ? 'link-placeholder' : `link-${product.shop}`;
+      const shopLabel = product.shopLabel || product.shop || 'Магазин';
       const linkContent = isPlaceholder
         ? '⏳ Скоро появится'
-        : `<img src="../images/icons/${product.shop}.png" alt="${product.shopLabel}" /> ${product.shopLabel}`;
+        : `<img src="../images/icons/${product.shop}.png" alt="${shopLabel}" /> ${shopLabel}`;
 
       return `
-        <div class="product-card" data-shop="${product.shop}">
-          <img class="product-image" src="${product.image}" alt="${product.name}" loading="lazy" />
-          <h3 class="product-name">${product.name}</h3>
+        <div class="product-card" data-shop="${product.shop || 'vkusvill'}">
+          <img class="product-image" src="${product.image || 'https://placehold.co/300x200/eee/ccc?text=Нет+фото'}" alt="${product.name}" loading="lazy" />
+          <h3 class="product-name">${product.name || 'Без названия'}</h3>
           <span class="product-weight">${weightDisplay}</span>
           <div class="product-price">${priceDisplay}</div>
           <div class="partner-links">
-            <a href="${product.link}" target="_blank" class="${linkClass}">${linkContent}</a>
+            <a href="${product.link || '#'}" target="_blank" class="${linkClass}">${linkContent}</a>
           </div>
         </div>
       `;
@@ -40,7 +67,6 @@ document.addEventListener('DOMContentLoaded', function () {
     initScrollAnimations();
   }
 
-  // ----- 3. ФИЛЬТРАЦИЯ -----
   function applyFilter() {
     const activeBtn = document.querySelector('.filter-btn.active');
     if (!activeBtn) return;
@@ -58,7 +84,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ----- 4. ОБРАБОТЧИКИ ФИЛЬТРОВ -----
   function initFilters() {
     const buttons = document.querySelectorAll('.filter-btn');
     buttons.forEach(btn => {
@@ -70,7 +95,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ----- 5. АНИМАЦИЯ ПРИ СКРОЛЛЕ -----
   function initScrollAnimations() {
     const cards = document.querySelectorAll('.product-card');
     const observer = new IntersectionObserver((entries) => {
@@ -93,7 +117,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ----- 6. ИНЪЕКЦИЯ CSS-АНИМАЦИИ -----
   function injectAnimationStyles() {
     const style = document.createElement('style');
     style.textContent = `
@@ -105,7 +128,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.head.appendChild(style);
   }
 
-  // ----- 7. ЗАПУСК -----
   injectAnimationStyles();
   initFilters();
 
