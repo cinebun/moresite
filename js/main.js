@@ -2,10 +2,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   let allProducts = [];
 
-  fetch('data/products.md')
-    .then(response => response.text())
-    .then(text => {
-      allProducts = parseMarkdownProducts(text);
+  fetch('data/products.json')
+    .then(response => response.json())
+    .then(data => {
+      allProducts = data.products || [];
       const initialProducts = getProductsOfDay();
       renderProducts(initialProducts);
     })
@@ -15,31 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
         grid.innerHTML = '<p style="text-align:center;padding:40px;">Не удалось загрузить товары. Пожалуйста, обновите страницу.</p>';
       }
     });
-
-  function parseMarkdownProducts(text) {
-    const lines = text.split('\n').filter(line => line.trim() !== '');
-    const products = [];
-    let current = {};
-
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i];
-      if (line.startsWith('## ')) {
-        if (Object.keys(current).length > 0) {
-          products.push(current);
-        }
-        current = {};
-        const nameMatch = line.match(/## (.+)/);
-        if (nameMatch) current.name = nameMatch[1];
-      } else if (line.includes(':')) {
-        const [key, value] = line.split(':').map(s => s.trim());
-        current[key] = value;
-      }
-    }
-    if (Object.keys(current).length > 0) {
-      products.push(current);
-    }
-    return products;
-  }
 
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -67,18 +42,19 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!grid) return;
 
     grid.innerHTML = products.map(product => {
-      const weightDisplay = product.weight ? `${product.weight} ${product.weight_unit || 'г'}` : '';
-      const priceDisplay = product.price ? `${product.price} ${product.price_type || '₽/кг'}` : '';
+      const isPlaceholder = !product.link || product.link === '#';
+      const linkClass = isPlaceholder ? 'link-placeholder' : `link-${product.shop}`;
       const shopLabel = product.shopLabel || product.shop || 'Магазин';
-      const linkClass = `link-${product.shop}`;
-      const linkContent = `<img src="images/icons/${product.shop}.png" alt="${shopLabel}" /> ${shopLabel}`;
+      const linkContent = isPlaceholder
+        ? '⏳ Скоро появится'
+        : `<img src="images/icons/${product.shop}.png" alt="${shopLabel}" /> ${shopLabel}`;
 
       return `
         <div class="product-card" data-shop="${product.shop || 'vkusvill'}">
           <img class="product-image" src="${product.image || 'https://placehold.co/300x200/eee/ccc?text=Нет+фото'}" alt="${product.name}" loading="lazy" />
           <h3 class="product-name">${product.name || 'Без названия'}</h3>
-          <span class="product-weight">${weightDisplay}</span>
-          <div class="product-price">${priceDisplay}</div>
+          <span class="product-weight">${product.weight || ''}</span>
+          <div class="product-price">${product.price || ''}</div>
           <div class="partner-links">
             <a href="${product.link || '#'}" target="_blank" class="${linkClass}">${linkContent}</a>
           </div>
