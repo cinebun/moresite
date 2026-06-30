@@ -1,254 +1,274 @@
-// ============================================
-// ТОВАРЫ ДНЯ (с правильными shopLabel)
-// ============================================
+/* ============================================
+   ГЛАВНАЯ СТРАНИЦА — Товар дня (4 товара)
+   ============================================ */
 
-const allProducts = [
-    {
-        id: 1,
-        name: 'Дорадо в оливковом масле с пряностями зам.',
-        weight: '1 кг',
-        price: '1 750 ₽/кг',
-        shop: 'vkusvill',
-        link: 'https://vkusvill.ru/goods/xmlid/29326',
-        image: 'images/products/dorado.jpg',
-        shopLabel: 'ВкусВилл'
-    },
-    {
-        id: 2,
-        name: 'Кальмар кольца зам.',
-        weight: '400 г',
-        price: '608 ₽/шт',
-        shop: 'vkusvill',
-        link: 'https://vkusvill.ru/goods/xmlid/17103',
-        image: 'images/products/kalmar.jpg',
-        shopLabel: 'ВкусВилл'
-    },
-    {
-        id: 3,
-        name: 'Креветки аргентинские без головы зам.',
-        weight: '500 г',
-        price: '1 147 ₽/шт',
-        shop: 'vkusvill',
-        link: 'https://vkusvill.ru/goods/xmlid/17661',
-        image: 'images/products/krevetki.jpg',
-        shopLabel: 'ВкусВилл'
-    },
-    {
-        id: 4,
-        name: 'Медальоны из форели зам.',
-        weight: '200 г',
-        price: '490 ₽/шт',
-        shop: 'vkusvill',
-        link: 'https://vkusvill.ru/goods/xmlid/37746',
-        image: 'images/products/forel.jpg',
-        shopLabel: 'ВкусВилл'
-    },
-    {
-        id: 5,
-        name: 'Мидии мясо вареные 200/300 зам.',
-        weight: '500 г',
-        price: '635 ₽/шт',
-        shop: 'vkusvill',
-        link: 'https://vkusvill.ru/goods/xmlid/1173',
-        image: 'images/products/midii.jpg',
-        shopLabel: 'ВкусВилл'
-    },
-    {
-        id: 6,
-        name: 'Морской коктейль зам.',
-        weight: '400 г',
-        price: '642 ₽/шт',
-        shop: 'vkusvill',
-        link: 'https://vkusvill.ru/goods/xmlid/20480',
-        image: 'images/products/kokteyl.jpg',
-        shopLabel: 'ВкусВилл'
-    },
-    {
-        id: 7,
-        name: 'Тунец филе-кусок без кожи зам.',
-        weight: '600 г',
-        price: '1 287 ₽/шт',
-        shop: 'vkusvill',
-        link: 'https://vkusvill.ru/goods/xmlid/68903',
-        image: 'images/products/tunets.jpg',
-        shopLabel: 'ВкусВилл'
-    },
-    {
-        id: 8,
-        name: 'Креветки варёно-мороженные',
-        weight: '500 г',
-        price: '454 ₽/шт',
-        shop: 'lavka',
-        link: 'https://lavka.yandex.ru/supermarket/good/krevetki-varyono-morozhenye-iz-lavki-severnye-nerazdelannye-500-gram',
-        image: 'images/products/krevetki-lavka.jpg',
-        shopLabel: 'Яндекс Лавка'
-    },
-    {
-        id: 9,
-        name: 'Горбуша филе на коже в медово-горчичном соусе',
-        weight: '350 г',
-        price: '440 ₽/шт',
-        shop: 'lavka',
-        link: 'https://lavka.yandex.ru/supermarket/good/gorbusha-file-iz-lavki-na-kozhe-v-medovo-gorchichnom-souse-350-gram',
-        image: 'images/products/gorbusa-medovaya.jpg',
-        shopLabel: 'Яндекс Лавка'
-    },
-    {
-        id: 10,
-        name: 'Треска филе порционное зам.',
-        weight: '400 г',
-        price: '405 ₽/шт',
-        shop: 'lavka',
-        link: 'https://lavka.yandex.ru/supermarket/good/treska-iz-lavki-file-porcionnoe-bez-kozhi-zamorozhennoe-400-gram',
-        image: 'images/products/treska-file.jpg',
-        shopLabel: 'Яндекс Лавка'
-    },
-    {
-        id: 11,
-        name: 'Горбуша филе порционное без кожи',
-        weight: '400 г',
-        price: '454 ₽/шт',
-        shop: 'lavka',
-        link: 'https://lavka.yandex.ru/supermarket/good/gorbusha-iz-lavki-file-porcionnoe-bez-kozhi-400-gram',
-        image: 'images/products/gorbusha-file.jpg',
-        shopLabel: 'Яндекс Лавка'
-    },
-    {
-        id: 12,
-        name: 'Минтай филе без кожи зам.',
-        weight: '400 г',
-        price: '300 ₽/шт',
-        shop: 'lavka',
-        link: 'https://lavka.yandex.ru/supermarket/good/mintaj-file-iz-lavki-bez-kozhi-zamorozhennyj-400-gram',
-        image: 'images/products/mintay-file.jpg',
-        shopLabel: 'Яндекс Лавка'
-    },
-    {
-        id: 13,
-        name: 'Медальоны из радужной форели зам.',
-        weight: '180 г',
-        price: '335 ₽/шт',
-        shop: 'lavka',
-        link: 'https://lavka.yandex.ru/supermarket/good/medalony-iz-raduzhnoj-foreli-iz-lavki-zamorozhennye-180-gram',
-        image: 'images/products/forel-medalony.jpg',
-        shopLabel: 'Яндекс Лавка'
-    },
-    {
-        id: 14,
-        name: 'Медальоны из горбуши с брокколи зам.',
-        weight: '180 г',
-        price: '230 ₽/шт',
-        shop: 'lavka',
-        link: 'https://lavka.yandex.ru/supermarket/good/medalony-iz-gorbushi-dalnevostochnoj-iz-lavki-s-brokkoli-zamorozhennye-180-gram',
-        image: 'images/products/gorbusa-brokkoli.jpg',
-        shopLabel: 'Яндекс Лавка'
-    },
-    {
-        id: 15,
-        name: 'Треска спинка лойн без кожи зам.',
-        weight: '400 г',
-        price: '699 ₽/шт',
-        shop: 'lavka',
-        link: 'https://lavka.yandex.ru/supermarket/good/treska-iz-lavki-file-spinki-bez-kozhi-zamorozhennaya-400-gram',
-        image: 'images/products/treska-loin.jpg',
-        shopLabel: 'Яндекс Лавка'
-    },
-    {
-        id: 16,
-        name: 'Кальмар командорской филе без кожи зам.',
-        weight: '400 г',
-        price: '384 ₽/шт',
-        shop: 'lavka',
-        link: 'https://lavka.yandex.ru/supermarket/good/kalmar-komandorskij-iz-lavki-tushka-ochishennyj-zamorozhennyj-400-gram',
-        image: 'images/products/kalmar-file.jpg',
-        shopLabel: 'Яндекс Лавка'
-    },
-    {
-        id: 17,
-        name: 'Тунец желтопёрый филе без кожи',
-        weight: '500 г',
-        price: '559 ₽/шт',
-        shop: 'lavka',
-        link: 'https://lavka.yandex.ru/supermarket/good/file-tunca-zheltopyorogo-iz-lavki-bez-kozhi-500-gram',
-        image: 'images/products/tunets-file.jpg',
-        shopLabel: 'Яндекс Лавка'
-    },
-    {
-        id: 18,
-        name: 'Форель радужная стейк зам.',
-        weight: '500 г',
-        price: '804 ₽/шт',
-        shop: 'lavka',
-        link: 'https://lavka.yandex.ru/supermarket/good/forel-raduzhnaya-iz-lavki-kusok-stejkovyj-zamorozhennyj-500-gram',
-        image: 'images/products/forel-steak.jpg',
-        shopLabel: 'Яндекс Лавка'
-    },
-    {
-        id: 19,
-        name: 'Филе хека, порционное, зам.',
-        weight: '300 г',
-        price: '339 ₽/шт',
-        shop: 'samokat',
-        link: 'https://samokat.ru/product/913eaf8f-45b3-11ee-b971-08c0eb32008b?pcs=true',
-        image: 'images/products/hek.jpg',
-        shopLabel: 'Самокат'
-    },
-    {
-        id: 20,
-        name: 'Медальоны из филе тунца и брокколи, зам.',
-        weight: '300 г',
-        price: '379 ₽/шт',
-        shop: 'samokat',
-        link: 'https://samokat.ru/product/ef45ea54-09bc-11ee-885e-08c0eb32014b?pcs=true',
-        image: 'images/products/tunets-medalony.jpg',
-        shopLabel: 'Самокат'
-    }
-];
-
-// ============================================
-// ОТРИСОВКА ТОВАРОВ ДНЯ
-// ============================================
 document.addEventListener('DOMContentLoaded', function () {
-    const initialProducts = getProductsOfDay();
-    renderProducts(initialProducts);
-    initProductOfDay();
-    initScrollAnimations();
-    injectAnimationStyles();
-});
 
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+    // ----- 1. ВСЕ ТОВАРЫ (ПОЛНЫЙ СПИСОК) -----
+    const allProducts = [
+        // === ВкусВилл (7) ===
+        {
+            id: 1,
+            name: 'Дорадо в оливковом масле с пряностями зам.',
+            weight: '1 кг',
+            price: '1 750 ₽/кг',
+            category: 'vkusvill',
+            image: 'images/products/dorado.jpg',
+            shop: 'vkusvill',
+            link: 'https://vkusvill.ru/goods/xmlid/29326',
+            shopLabel: 'ВкусВилл'
+        },
+        {
+            id: 2,
+            name: 'Кальмар кольца зам.',
+            weight: '400 г',
+            price: '608 ₽/шт',
+            category: 'vkusvill',
+            image: 'images/products/kalmar.jpg',
+            shop: 'vkusvill',
+            link: 'https://vkusvill.ru/goods/xmlid/17103',
+            shopLabel: 'ВкусВилл'
+        },
+        {
+            id: 3,
+            name: 'Креветки аргентинские без головы зам.',
+            weight: '500 г',
+            price: '1 147 ₽/шт',
+            category: 'vkusvill',
+            image: 'images/products/krevetki.jpg',
+            shop: 'vkusvill',
+            link: 'https://vkusvill.ru/goods/xmlid/17661',
+            shopLabel: 'ВкусВилл'
+        },
+        {
+            id: 4,
+            name: 'Медальоны из форели зам.',
+            weight: '200 г',
+            price: '490 ₽/шт',
+            category: 'vkusvill',
+            image: 'images/products/forel.jpg',
+            shop: 'vkusvill',
+            link: 'https://vkusvill.ru/goods/xmlid/37746',
+            shopLabel: 'ВкусВилл'
+        },
+        {
+            id: 5,
+            name: 'Мидии мясо вареные 200/300 зам.',
+            weight: '500 г',
+            price: '635 ₽/шт',
+            category: 'vkusvill',
+            image: 'images/products/midii.jpg',
+            shop: 'vkusvill',
+            link: 'https://vkusvill.ru/goods/xmlid/1173',
+            shopLabel: 'ВкусВилл'
+        },
+        {
+            id: 6,
+            name: 'Морской коктейль зам.',
+            weight: '400 г',
+            price: '642 ₽/шт',
+            category: 'vkusvill',
+            image: 'images/products/kokteyl.jpg',
+            shop: 'vkusvill',
+            link: 'https://vkusvill.ru/goods/xmlid/20480',
+            shopLabel: 'ВкусВилл'
+        },
+        {
+            id: 7,
+            name: 'Тунец филе-кусок без кожи зам.',
+            weight: '600 г',
+            price: '1 287 ₽/шт',
+            category: 'vkusvill',
+            image: 'images/products/tunets.jpg',
+            shop: 'vkusvill',
+            link: 'https://vkusvill.ru/goods/xmlid/68903',
+            shopLabel: 'ВкусВилл'
+        },
+
+        // === Яндекс Лавка (11) ===
+        {
+            id: 8,
+            name: 'Креветки варёно-мороженные',
+            weight: '500 г',
+            price: '454 ₽/шт',
+            category: 'lavka',
+            image: 'images/products/krevetki-lavka.jpg',
+            shop: 'lavka',
+            link: 'https://lavka.yandex.ru/supermarket/good/krevetki-varyono-morozhenye-iz-lavki-severnye-nerazdelannye-500-gram',
+            shopLabel: 'Яндекс Лавка'
+        },
+        {
+            id: 9,
+            name: 'Горбуша филе на коже в медово-горчичном соусе',
+            weight: '350 г',
+            price: '440 ₽/шт',
+            category: 'lavka',
+            image: 'images/products/gorbusa-medovaya.jpg',
+            shop: 'lavka',
+            link: 'https://lavka.yandex.ru/supermarket/good/gorbusha-file-iz-lavki-na-kozhe-v-medovo-gorchichnom-souse-350-gram',
+            shopLabel: 'Яндекс Лавка'
+        },
+        {
+            id: 10,
+            name: 'Треска филе порционное зам.',
+            weight: '400 г',
+            price: '405 ₽/шт',
+            category: 'lavka',
+            image: 'images/products/treska-file.jpg',
+            shop: 'lavka',
+            link: 'https://lavka.yandex.ru/supermarket/good/treska-iz-lavki-file-porcionnoe-bez-kozhi-zamorozhennoe-400-gram',
+            shopLabel: 'Яндекс Лавка'
+        },
+        {
+            id: 11,
+            name: 'Горбуша филе порционное без кожи',
+            weight: '400 г',
+            price: '454 ₽/шт',
+            category: 'lavka',
+            image: 'images/products/gorbusha-file.jpg',
+            shop: 'lavka',
+            link: 'https://lavka.yandex.ru/supermarket/good/gorbusha-iz-lavki-file-porcionnoe-bez-kozhi-400-gram',
+            shopLabel: 'Яндекс Лавка'
+        },
+        {
+            id: 12,
+            name: 'Минтай филе без кожи зам.',
+            weight: '400 г',
+            price: '300 ₽/шт',
+            category: 'lavka',
+            image: 'images/products/mintay-file.jpg',
+            shop: 'lavka',
+            link: 'https://lavka.yandex.ru/supermarket/good/mintaj-file-iz-lavki-bez-kozhi-zamorozhennyj-400-gram',
+            shopLabel: 'Яндекс Лавка'
+        },
+        {
+            id: 13,
+            name: 'Медальоны из радужной форели зам.',
+            weight: '180 г',
+            price: '335 ₽/шт',
+            category: 'lavka',
+            image: 'images/products/forel-medalony.jpg',
+            shop: 'lavka',
+            link: 'https://lavka.yandex.ru/supermarket/good/medalony-iz-raduzhnoj-foreli-iz-lavki-zamorozhennye-180-gram',
+            shopLabel: 'Яндекс Лавка'
+        },
+        {
+            id: 14,
+            name: 'Медальоны из горбуши с брокколи зам.',
+            weight: '180 г',
+            price: '230 ₽/шт',
+            category: 'lavka',
+            image: 'images/products/gorbusa-brokkoli.jpg',
+            shop: 'lavka',
+            link: 'https://lavka.yandex.ru/supermarket/good/medalony-iz-gorbushi-dalnevostochnoj-iz-lavki-s-brokkoli-zamorozhennye-180-gram',
+            shopLabel: 'Яндекс Лавка'
+        },
+        {
+            id: 15,
+            name: 'Треска спинка лойн без кожи зам.',
+            weight: '400 г',
+            price: '699 ₽/шт',
+            category: 'lavka',
+            image: 'images/products/treska-loin.jpg',
+            shop: 'lavka',
+            link: 'https://lavka.yandex.ru/supermarket/good/treska-iz-lavki-file-spinki-bez-kozhi-zamorozhennaya-400-gram',
+            shopLabel: 'Яндекс Лавка'
+        },
+        {
+            id: 16,
+            name: 'Кальмар командорской филе без кожи зам.',
+            weight: '400 г',
+            price: '384 ₽/шт',
+            category: 'lavka',
+            image: 'images/products/kalmar-file.jpg',
+            shop: 'lavka',
+            link: 'https://lavka.yandex.ru/supermarket/good/kalmar-komandorskij-iz-lavki-tushka-ochishennyj-zamorozhennyj-400-gram',
+            shopLabel: 'Яндекс Лавка'
+        },
+        {
+            id: 17,
+            name: 'Тунец желтопёрый филе без кожи',
+            weight: '500 г',
+            price: '559 ₽/шт',
+            category: 'lavka',
+            image: 'images/products/tunets-file.jpg',
+            shop: 'lavka',
+            link: 'https://lavka.yandex.ru/supermarket/good/file-tunca-zheltopyorogo-iz-lavki-bez-kozhi-500-gram',
+            shopLabel: 'Яндекс Лавка'
+        },
+        {
+            id: 18,
+            name: 'Форель радужная стейк зам.',
+            weight: '500 г',
+            price: '804 ₽/шт',
+            category: 'lavka',
+            image: 'images/products/forel-steak.jpg',
+            shop: 'lavka',
+            link: 'https://lavka.yandex.ru/supermarket/good/forel-raduzhnaya-iz-lavki-kusok-stejkovyj-zamorozhennyj-500-gram',
+            shopLabel: 'Яндекс Лавка'
+        },
+
+        // === Самокат (2) ===
+        {
+            id: 19,
+            name: 'Филе хека, порционное, зам.',
+            weight: '300 г',
+            price: '339 ₽/шт',
+            category: 'samokat',
+            image: 'images/products/hek.jpg',
+            shop: 'samokat',
+            link: 'https://samokat.ru/product/913eaf8f-45b3-11ee-b971-08c0eb32008b?pcs=true',
+            shopLabel: 'Самокат'
+        },
+        {
+            id: 20,
+            name: 'Медальоны из филе тунца и брокколи, зам.',
+            weight: '300 г',
+            price: '379 ₽/шт',
+            category: 'samokat',
+            image: 'images/products/tunets-medalony.jpg',
+            shop: 'samokat',
+            link: 'https://samokat.ru/product/ef45ea54-09bc-11ee-885e-08c0eb32014b?pcs=true',
+            shopLabel: 'Самокат'
+        }
+    ];
+
+    // ----- 2. ПЕРЕМЕШИВАНИЕ МАССИВА -----
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
     }
-    return array;
-}
 
-function getProductsOfDay() {
-    const vkusvillProducts = allProducts.filter(p => p.shop === 'vkusvill');
-    const lavkaProducts = allProducts.filter(p => p.shop === 'lavka');
+    // ----- 3. ВЫБОР ТОВАРОВ ДНЯ -----
+    function getProductsOfDay() {
+        const vkusvillProducts = allProducts.filter(p => p.shop === 'vkusvill');
+        const lavkaProducts = allProducts.filter(p => p.shop === 'lavka');
 
-    const shuffledVkusvill = shuffleArray([...vkusvillProducts]);
-    const shuffledLavka = shuffleArray([...lavkaProducts]);
+        const shuffledVkusvill = shuffleArray([...vkusvillProducts]);
+        const shuffledLavka = shuffleArray([...lavkaProducts]);
 
-    const selectedVkusvill = shuffledVkusvill.slice(0, 2);
-    const selectedLavka = shuffledLavka.slice(0, 2);
+        const selectedVkusvill = shuffledVkusvill.slice(0, 2);
+        const selectedLavka = shuffledLavka.slice(0, 2);
 
-    return shuffleArray([...selectedVkusvill, ...selectedLavka]);
-}
+        return shuffleArray([...selectedVkusvill, ...selectedLavka]);
+    }
 
-function renderProducts(products) {
-    const grid = document.getElementById('productsGrid');
-    if (!grid) return;
+    // ----- 4. ОТРИСОВКА КАРТОЧЕК -----
+    function renderProducts(products) {
+        const grid = document.getElementById('productsGrid');
+        if (!grid) return;
 
-    grid.innerHTML = products.map(product => {
-        const isPlaceholder = !product.link || product.link === '#';
-        const linkClass = isPlaceholder ? 'link-placeholder' : `link-${product.shop}`;
-        const linkContent = isPlaceholder
-            ? '⏳ Скоро появится'
-            : `<img src="images/icons/${product.shop}.png" alt="${product.shopLabel}" /> ${product.shopLabel}`;
+        grid.innerHTML = products.map(product => {
+            const isPlaceholder = product.link === '#';
+            const linkClass = isPlaceholder ? 'link-placeholder' : `link-${product.shop}`;
+            const linkContent = isPlaceholder
+                ? '⏳ Скоро появится'
+                : `<img src="images/icons/${product.shop}.png" alt="${product.shopLabel}" /> ${product.shopLabel}`;
 
-        return `
+            return `
             <div class="product-card" data-shop="${product.shop}">
                 <img class="product-image" src="${product.image}" alt="${product.name}" loading="lazy" />
                 <h3 class="product-name">${product.name}</h3>
@@ -258,54 +278,66 @@ function renderProducts(products) {
                     <a href="${product.link}" target="_blank" class="${linkClass}">${linkContent}</a>
                 </div>
             </div>
-        `;
-    }).join('');
+        `}).join('');
 
-    initScrollAnimations();
-}
+        initScrollAnimations();
+    }
 
-function initProductOfDay() {
-    const btn = document.querySelector('.filter-btn[data-filter="day"]');
-    if (!btn) return;
+    // ----- 5. КНОПКА "ТОВАР ДНЯ" -----
+    function initProductOfDay() {
+        const btn = document.querySelector('.filter-btn[data-filter="day"]');
+        if (!btn) return;
 
-    btn.addEventListener('click', function () {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
+        btn.addEventListener('click', function () {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
 
-        const productsOfDay = getProductsOfDay();
-        renderProducts(productsOfDay);
-    });
-}
-
-function initScrollAnimations() {
-    const cards = document.querySelectorAll('.product-card');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }, index * 80);
-                observer.unobserve(entry.target);
-            }
+            const productsOfDay = getProductsOfDay();
+            renderProducts(productsOfDay);
         });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    }
 
-    cards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(card);
-    });
-}
+    // ----- 6. АНИМАЦИЯ ПРИ СКРОЛЛЕ -----
+    function initScrollAnimations() {
+        const cards = document.querySelectorAll('.product-card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 80);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-function injectAnimationStyles() {
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    `;
-    document.head.appendChild(style);
-}
+        cards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    }
+
+    // ----- 7. ИНЪЕКЦИЯ CSS-АНИМАЦИИ -----
+    function injectAnimationStyles() {
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    // ----- 8. ЗАПУСК -----
+    injectAnimationStyles();
+
+    const initialProducts = getProductsOfDay();
+    renderProducts(initialProducts);
+
+    initProductOfDay();
+
+});
