@@ -1,35 +1,50 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-  fetch('/data/products.json')
-    .then(response => response.json())
-    .then(data => {
-      renderCatalog(data.products);
+  fetch('data/products.md')
+    .then(response => response.text())
+    .then(text => {
+      const products = parseMarkdownProducts(text);
+      renderCatalog(products);
     })
     .catch(() => {
       renderCatalog([]);
     });
+
+  function parseMarkdownProducts(text) {
+    const lines = text.split('\n').filter(line => line.trim() !== '');
+    const products = [];
+    let current = {};
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      if (line.startsWith('## ')) {
+        if (Object.keys(current).length > 0) {
+          products.push(current);
+        }
+        current = {};
+        const nameMatch = line.match(/## (.+)/);
+        if (nameMatch) current.name = nameMatch[1];
+      } else if (line.includes(':')) {
+        const [key, value] = line.split(':').map(s => s.trim());
+        current[key] = value;
+      }
+    }
+    if (Object.keys(current).length > 0) {
+      products.push(current);
+    }
+    return products;
+  }
 
   function renderCatalog(products) {
     const grid = document.getElementById('catalogGrid');
     if (!grid) return;
 
     grid.innerHTML = products.map(product => {
-      let weightDisplay = '';
-      if (product.weight) {
-        weightDisplay = `${product.weight} ${product.weight_unit || 'г'}`;
-      }
-
-      let priceDisplay = '';
-      if (product.price) {
-        priceDisplay = `${product.price} ${product.price_type || '₽/кг'}`;
-      }
-
-      const isPlaceholder = !product.link || product.link === '#';
-      const linkClass = isPlaceholder ? 'link-placeholder' : `link-${product.shop}`;
+      const weightDisplay = product.weight ? `${product.weight} ${product.weight_unit || 'г'}` : '';
+      const priceDisplay = product.price ? `${product.price} ${product.price_type || '₽/кг'}` : '';
       const shopLabel = product.shopLabel || product.shop || 'Магазин';
-      const linkContent = isPlaceholder
-        ? '⏳ Скоро появится'
-        : `<img src="../images/icons/${product.shop}.png" alt="${shopLabel}" /> ${shopLabel}`;
+      const linkClass = `link-${product.shop}`;
+      const linkContent = `<img src="../images/icons/${product.shop}.png" alt="${shopLabel}" /> ${shopLabel}`;
 
       return `
         <div class="product-card" data-shop="${product.shop || 'vkusvill'}">
@@ -51,10 +66,8 @@ document.addEventListener('DOMContentLoaded', function () {
   function applyFilter() {
     const activeBtn = document.querySelector('.filter-btn.active');
     if (!activeBtn) return;
-
     const filter = activeBtn.dataset.filter;
     const cards = document.querySelectorAll('.product-card');
-
     cards.forEach(card => {
       if (filter === 'all' || card.dataset.shop === filter) {
         card.style.display = 'block';

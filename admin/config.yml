@@ -12,8 +12,7 @@ collections:
     label: "Товары"
     folder: "data"
     create: true
-    format: "json"
-    slug: "products"
+    slug: "{{slug}}"
     fields:
       - { label: "ID", name: "id", widget: "number", required: true }
       - { label: "Название", name: "name", widget: "string" }
