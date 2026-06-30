@@ -21,7 +21,6 @@
       font-weight: 600;
     }
   </style>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
   <div class="admin-header">
@@ -30,18 +29,18 @@
   </div>
   <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
   <script>
-    function logout() {
+    // Проверяем, залогинен ли пользователь (через Netlify Identity)
+    if (window.netlifyIdentity) {
       const netlifyIdentity = window.netlifyIdentity;
-      if (netlifyIdentity) {
-        netlifyIdentity.logout();
-        window.location.href = '/admin/';
-      }
-    }
-    const netlifyIdentity = window.netlifyIdentity;
-    if (netlifyIdentity) {
       netlifyIdentity.init();
       if (!netlifyIdentity.currentUser()) {
-        window.location.href = '/admin/';
+        window.location.href = '/admin/index.html';
+      }
+    }
+    function logout() {
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.logout();
+        window.location.href = '/admin/index.html';
       }
     }
   </script>

@@ -5,44 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Админ-панель</title>
   <link rel="stylesheet" href="https://unpkg.com/netlify-cms@^2.0.0/dist/cms.css" />
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-  <div id="root"></div>
   <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
-  <script>
-    const netlifyIdentity = window.netlifyIdentity;
-    
-    if (netlifyIdentity) {
-      // Инициализируем
-      netlifyIdentity.init();
-
-      // ОБРАБАТЫВАЕМ ВСЕ ТОКЕНЫ ИЗ URL (приглашения, сброс пароля, подтверждение)
-      if (window.location.hash) {
-        netlifyIdentity._handleToken(window.location.hash);
-      }
-
-      // При успешном входе — в админку
-      netlifyIdentity.on('login', function(user) {
-        window.location.href = '/admin/dashboard.html';
-      });
-
-      // При выходе — на страницу входа
-      netlifyIdentity.on('logout', function() {
-        window.location.href = '/admin/';
-      });
-
-      // Если уже залогинен — сразу в админку
-      if (netlifyIdentity.currentUser()) {
-        window.location.href = '/admin/dashboard.html';
-      }
-
-      // ПРИНУДИТЕЛЬНО ОБРАБАТЫВАЕМ ССЫЛКИ ВОССТАНОВЛЕНИЯ
-      if (window.location.href.includes('recovery_token')) {
-        netlifyIdentity._confirmEmail(window.location.hash);
-        window.location.href = '/admin/dashboard.html';
-      }
-    }
-  </script>
 </body>
 </html>
