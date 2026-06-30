@@ -1,5 +1,5 @@
 // ============================================
-// ВСЕ ТОВАРЫ (хранятся прямо здесь)
+// ВСЕ ТОВАРЫ (с правильными shopLabel)
 // ============================================
 const products = [
     {
@@ -221,6 +221,7 @@ function renderCatalog(products) {
     grid.innerHTML = products.map(product => {
         const isPlaceholder = !product.link || product.link === '#';
         const linkClass = isPlaceholder ? 'link-placeholder' : `link-${product.shop}`;
+        // ИСПОЛЬЗУЕМ shopLabel ДЛЯ РУССКОГО НАЗВАНИЯ
         const linkContent = isPlaceholder
             ? '⏳ Скоро появится'
             : `<img src="../images/icons/${product.shop}.png" alt="${product.shopLabel}" /> ${product.shopLabel}`;
