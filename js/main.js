@@ -52,22 +52,6 @@ document.addEventListener('DOMContentLoaded', function () {
         priceDisplay = `${product.price} ${product.price_type || '₽/кг'}`;
       }
 
-      // Поддержка старого формата
-      if (!product.weight_unit && typeof product.weight === 'string') {
-        const weightMatch = product.weight.match(/(\d+)\s*(г|кг)/);
-        if (weightMatch) {
-          product.weight = parseInt(weightMatch[1]);
-          product.weight_unit = weightMatch[2];
-        }
-      }
-      if (!product.price_type && typeof product.price === 'string') {
-        const priceMatch = product.price.match(/(\d+)\s*₽\/(кг|шт)/);
-        if (priceMatch) {
-          product.price = parseInt(priceMatch[1]);
-          product.price_type = `₽/${priceMatch[2]}`;
-        }
-      }
-
       const isPlaceholder = !product.link || product.link === '#';
       const linkClass = isPlaceholder ? 'link-placeholder' : `link-${product.shop}`;
       const shopLabel = product.shopLabel || product.shop || 'Магазин';

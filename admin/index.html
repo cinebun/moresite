@@ -14,9 +14,6 @@
     const netlifyIdentity = window.netlifyIdentity;
     if (netlifyIdentity) {
       netlifyIdentity.init();
-      netlifyIdentity.on('login', function() {
-        document.location.href = '/admin/dashboard.html';
-      });
     }
   </script>
 </body>
